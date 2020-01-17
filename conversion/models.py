@@ -6,6 +6,8 @@ class SaveConverter(models.Model):
     #  поле которое будет хранить вводимое число
     result_converter = models.CharField('Результат конвертации', max_length=30)
     #  поле которое будет хранить результат конвертации
+    ip_address = models.CharField('IP', max_length=256)
+    # поле которое будет хранить IP адрес пользователя который сделал запрос
 
     def __str__(self):
         return f'{self.number_converter}: {self.result_converter}'
