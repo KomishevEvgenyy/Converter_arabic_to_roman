@@ -1,10 +1,27 @@
 from django.shortcuts import render
-from conversion.models import SaveConverter
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-
+from .models import SaveConverter
 from .arabic_converter import ConverterToArabic
 from .roman_converter import ConverterToRoman
+
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+
+
+def input_numbers(request):
+    """
+        Метод который будет заисывать входящие данные в базу данных.
+
+        Принимает request.
+    """
+    num = input('enter you number')
+    number = SaveConverter.objects.create(number_converter=num)
+
+    #number = SaveConverter.objects.create(number_converter=request.POST['number'])
+    #  запись в базу данных вводимого числа через request.POST
+    result = convert(number)
+    a = number.create(result_converter=result)
+    latest_result = a.order_by('-id')[:1]
+    return render(request, 'conversion/base.html')
 
 
 def convert(number):
@@ -15,10 +32,7 @@ def convert(number):
     return num.arabic
 
 
-def input_numbers(request, number):
-    num = SaveConverter.objects.create(number_convert=request.POST['input'])
-    #  запись в базу данных вводимого числа
-    return HttpResponseRedirect(reverse('conversion.base'))
+
 
 
 

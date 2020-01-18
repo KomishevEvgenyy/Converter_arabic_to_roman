@@ -1,3 +1,10 @@
+"""
+    Класс ConverterToRoman провдит конвертацию на с арабских на римские числа.
+
+
+"""
+
+
 class ConverterToRoman(int):
     def __new__(cls, number):
         if number > 3999:

@@ -6,13 +6,12 @@
 </head>
 <body>
     <h2>Конвектор Римских Арабских цифр</h2>
-    <table>
-        <tr>
-            <td> <textarea name="input" required="" placeholder="Введите число" cols="30" rows="10"></textarea></tex> </td>
-            <td><button type="submit">Конвертировать</button></td>
-            <td><em name="result"></em></td>
-        </tr>
-    </table>
+    <form action="{% url 'conversion.input' %}" method="POST">
+        {% csrf_token %}
+        <textarea name="number" required="" placeholder="Введите число" cols="30" rows="10"></textarea></tex>
+        <button type="submit">Конвертировать</button>
+    </form>
+    <em name="result">{{ latest_result }}</em>
 
 </body>
 </html>
