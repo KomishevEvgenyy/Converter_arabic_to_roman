@@ -1,10 +1,9 @@
 from django.urls import path
-from conversion.views import convert, input_numbers
+from conversion.views import input_numbers
 
 
 app_name = 'conversion'
 #  привязка url к приложению conversion
 urlpatterns = [
-     #path('convert/', convert, name='convert'),
-     path('input/', input_numbers, name='input')
+     path('input/', input_numbers, name='input'),
 ]
