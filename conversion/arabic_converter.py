@@ -1,5 +1,5 @@
 """
-    Класс ConverterToArabic проодит конвертацию с римских на арбские числа.
+    Класс ConverterToArabic проводит конвертацию с римских на арабские числа.
 
     Принимает строковое значение, проверяет значение на валидность и если значение валидное проводит
     конвертацию.
@@ -18,7 +18,7 @@ class ConverterToArabic(str):
         self.arabic = sum(int(num) for num in roman.split())
 
     def check_valid(self, roman):
-        #  метод проверки ввода данных на их коректность
+        #  метод проверки ввода данных на их валидность
         roman = roman.upper()
         invalid = ['IIII', 'VV', 'XXXX', 'LL', 'CCCC', 'DD', 'MMMM']
         if any(sub in roman for sub in invalid):
