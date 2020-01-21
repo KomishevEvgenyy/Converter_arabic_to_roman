@@ -11,21 +11,22 @@
     <title>Конвектор</title>
 </head>
 <body>
-    <h2>Конвектор Римских Арабских чисел</h2>
+    <h2>Конвертер римских и арабских чисел</h2>
     <form action="{% url 'conversion:input' %}" method="POST">
         {% csrf_token %}
-        <div>
-            <textarea name="num" required="" placeholder="Введите число" cols="30" rows="7" autofocus></textarea>
-
-        </div>
-        <div>
-            <button type="submit">Конвертировать</button>
-        </div>
-        <div>
-            <textarea name="result" required="" placeholder="Результат" cols="30" rows="7" readonly="readonly">{{latest_result}}</textarea>
-        </div>
+        <table >
+            <th>
+                <td>
+                    <textarea name="num" required="" placeholder="Введите число" cols="30" rows="7" autofocus></textarea>
+                </td>
+                <td>
+                     <button type="submit">Конвертировать</button>
+                </td>
+                 <td>
+                     <textarea name="result" required="" placeholder="Результат" cols="30" rows="7" readonly="readonly">{{latest_result}}</textarea>
+                </td>
+            </th>
+        </table>
     </form>
-
-
 </body>
 </html>
