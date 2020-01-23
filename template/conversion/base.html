@@ -12,12 +12,14 @@
 </head>
 <body>
     <h2>Конвертер римских и арабских чисел</h2>
-    <form action="{% url 'conversion:input' %}" method="POST">
+    <div>
+
+         <form action="{% url 'conversion:input' %}" method="POST">
         {% csrf_token %}
         <table >
             <th>
                 <td>
-                    <textarea name="num" required="" placeholder="Введите число" cols="30" rows="7" autofocus></textarea>
+                    <textarea name="num" required="" placeholder="Введите число" cols="30" rows="7" >{{number_converter}}</textarea>
                 </td>
                 <td>
                      <button type="submit">Конвертировать</button>
@@ -28,5 +30,7 @@
             </th>
         </table>
     </form>
+    </div>
+<script src="{% static 'js/fetch.css' %}"></script>
 </body>
 </html>

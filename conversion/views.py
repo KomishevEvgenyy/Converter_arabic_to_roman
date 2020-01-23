@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import SaveConverter
 from .arabic_converter import ConverterToArabic
 from .roman_converter import ConverterToRoman
+from .forms import ConverterForm
 
 
 def convert(number):
@@ -23,13 +24,17 @@ def input_numbers(request):
     """
     template_name = 'conversion/base.html'
     if request.method == 'POST':
-        number = request.POST['num']
-        #  Запись данных в переменную которые пришли через POST запрос
-        result = convert(number)
-        # Конвертируем полученные данные и результат записываем в переменную
-        save = SaveConverter.objects.create(number_converter=number, result_converter=result)
-        #  Сохраняем результат в базу данных
-        latest_result = result
-        ctx = {'latest_result': latest_result}
+        form = ConverterForm(request.POST)
+        if form.is_valid():
+            number = request.POST['num']
+            #  Запись данных в переменную которые пришли через POST запрос
+            result = convert(number)
+            # Конвертируем полученные данные и результат записываем в переменную
+            save = SaveConverter.objects.create(number_converter=number, result_converter=result)
+            #  Сохраняем результат в базу данных
+            latest_result = result
+            ctx = {'latest_result': latest_result}
 
-        return render(request, template_name, ctx)
+            return render(request, template_name, ctx)
+    else:
+        return render(request, template_name)
