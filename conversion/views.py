@@ -27,6 +27,7 @@ def input_numbers(request):
         form = ConverterForm(request.POST)
         if form.is_valid():
             number = request.POST['num']
+            number
             #  Запись данных в переменную которые пришли через POST запрос
             result = convert(number)
             # Конвертируем полученные данные и результат записываем в переменную
