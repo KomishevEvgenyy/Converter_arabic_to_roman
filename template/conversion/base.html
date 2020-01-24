@@ -8,12 +8,40 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+    <script>
+        function formjson(form) {
+            var fail = false;
+            var incoming = form.incoming.value;
+            var number;
+            if (incoming == '' || incoming == " ") {
+                fail = "Число не введено"
+            if (fail) {
+                alert(fail)
+            }
+            else{
+                return false
+                }
+            } else {
+                fetch('conversion:input', {
+                    method: 'POST',
+                    headers: {'Content-type': 'application/json'},
+                    body: JSON.stringify({pole: 100500})
+                })
+            }
+        }
+    </script>
     <title>Конвектор</title>
 </head>
 <body>
     <h2>Конвертер римских и арабских чисел</h2>
     <div>
-
+        <form action="" method="post" id="form">
+            <textarea type="text" name="incoming" placeholder="Введите число" id="incoming" cols="30" rows="7"></textarea>
+            <input type="button" onclick="formjson(document.getElementById('form'))" name="button" value="Конвертировать"/>
+            <textarea name="result" placeholder="Рузультат" cols="30" rows="7" readonly="readonly" id="result">{{latest_result}}</textarea>
+        </form>
+<!--
          <form action="{% url 'conversion:input' %}" method="POST">
         {% csrf_token %}
         <table >
@@ -22,7 +50,7 @@
                     <textarea name="num" required="" placeholder="Введите число" cols="30" rows="7" ></textarea>
                 </td>
                 <td>
-                     <button type="submit">Конвертировать</button>
+                     <button type="submit" name="click" onclick="fetch(num)">Конвертировать</button>
                 </td>
                  <td>
                      <textarea name="result" required="" placeholder="Результат" cols="30" rows="7" readonly="readonly">{{latest_result}}</textarea>
@@ -30,6 +58,7 @@
             </th>
         </table>
     </form>
+        -->
     </div>
 <script src="{% static 'js/fetch.css' %}"></script>
 </body>

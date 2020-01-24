@@ -26,8 +26,7 @@ def input_numbers(request):
     if request.method == 'POST':
         form = ConverterForm(request.POST)
         if form.is_valid():
-            number = request.POST['num']
-            number
+            number = request.POST['incoming']  # как сюда передать результат функции fetch???????????
             #  Запись данных в переменную которые пришли через POST запрос
             result = convert(number)
             # Конвертируем полученные данные и результат записываем в переменную
