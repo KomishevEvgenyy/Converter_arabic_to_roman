@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import json
 
 from .models import SaveConverter
 from .arabic_converter import ConverterToArabic
@@ -22,11 +23,13 @@ def input_numbers(request):
         input_numbers принимает POST запрос передает его в функцию convert которая после выполнения записывает данные
         в базу данных
     """
+    #  в request прилитает class 'django.core.handlers.wsgi.WSGIRequest'
+
     template_name = 'conversion/base.html'
     if request.method == 'POST':
         form = ConverterForm(request.POST)
         if form.is_valid():
-            number = request.POST['incoming']  # как сюда передать результат функции fetch???????????
+            number = request.POST['formjson']  # как сюда передать результат функции???????????
             #  Запись данных в переменную которые пришли через POST запрос
             result = convert(number)
             # Конвертируем полученные данные и результат записываем в переменную
