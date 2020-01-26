@@ -5,5 +5,5 @@
 удобным для Вас способом.
 Далее запустите виртуальное окружение и установите две библиотеки Django (pip install django) и Grappelli (pip install django-grappelli).</p>
 <p>После установки выполните команду python manage.py runserver и перейдите по <a href="http://127.0.0.1:8000/input/">
-ссылке </a> http://127.0.0.1:8000/input/</p>
+ссылке </a> http://127.0.0.1:8000/conversion/input/</p>
 <p>В открывшемся окне Web браузера введите желаемое римское число.</p>
