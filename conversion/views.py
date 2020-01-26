@@ -24,12 +24,12 @@ def input_numbers(request):
         в базу данных
     """
     #  в request прилитает class 'django.core.handlers.wsgi.WSGIRequest'
-
+    print(type(request))
     template_name = 'conversion/base.html'
     if request.method == 'POST':
         form = ConverterForm(request.POST)
         if form.is_valid():
-            number = request.POST['formjson']  # как сюда передать результат функции???????????
+            number = request.POST['body']  # как сюда передать результат функции???????????
             #  Запись данных в переменную которые пришли через POST запрос
             result = convert(number)
             # Конвертируем полученные данные и результат записываем в переменную
