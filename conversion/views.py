@@ -1,6 +1,5 @@
 from django.shortcuts import render
 import json
-from re import findall
 
 from .models import SaveConverter
 from .arabic_converter import ConverterToArabic
@@ -24,14 +23,11 @@ def input_numbers(request):
         input_numbers принимает POST запрос передает его в функцию convert которая после выполнения записывает данные
         в базу данных
     """
-    #  в request прилитает class 'django.core.handlers.wsgi.WSGIRequest'
-
-
     template_name = 'conversion/base.html'
     if request.method == 'POST':
         form = ConverterForm(request.POST)
         if form.is_valid():
-            data = json.load(request)  # как сюда передать результат функции???????????
+            data = json.load(request)
             #  Запись данных в переменную которые пришли в request
             if data.isdigit():
                 #  проверяем состоит ли строка только из цифр
@@ -41,16 +37,16 @@ def input_numbers(request):
                 # Конвертируем полученные данные и результат записываем в переменную
                 save = SaveConverter.objects.create(number_converter=number, result_converter=result)
                 #  Сохраняем результат в базу данных
-                latest_result = result
-                ctx = {'latest_result': latest_result}
+                latest_result = {'result': result}
+                #ctx = {'latest_result': latest_result}
             else:
                 result = convert(data)
                 # Конвертируем полученные данные и результат записываем в переменную
                 save = SaveConverter.objects.create(number_converter=data, result_converter=result)
                 #  Сохраняем результат в базу данных
-                latest_result = result
-                ctx = {'latest_result': latest_result}
+                latest_result = {'result': result}
+                # ctx = {'latest_result': latest_result}
 
-            return render(request, template_name, ctx)
+            return render(request, template_name, latest_result)
     else:
         return render(request, template_name)

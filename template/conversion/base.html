@@ -28,9 +28,13 @@
             }
             return cookieValue;
         }
+        function converter_result(response) {
+            document.getElementById('click').InnerHTML=response
+        }
         function formjson(value) {
 
             var fail = false;
+            let result = null;
             if (!value.length) {
                 fail = "Число не введено"
             if (fail) {
@@ -45,8 +49,9 @@
                     headers: { "X-CSRFToken": getCookie("csrftoken"),
                                     "Accept": "application/json",
                                     "Content-Type": "application/json"},
-                    body: [JSON.stringify(value)]
+                    body: [JSON.stringify(value)]//.then(data => data.json()).then(res => converter_result = res)
                 })
+            //document.getElementById('click').value = result
             }
         }
     </script>
@@ -65,7 +70,7 @@
                         <input type="button" onclick="formjson(document.getElementById('incoming').value)" name="button" value="Конвертировать"/>
                     </td>
                     <td>
-                        <textarea name="result" placeholder="Рузультат" cols="30" rows="7" readonly="readonly" id="result">{{latest_result}}</textarea>
+                        <textarea name="click" placeholder="Результат" cols="30" rows="7" readonly="readonly" id="click" value="">{{latest_result}}</textarea>
                     </td>
                 </th>
             </table>
