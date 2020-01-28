@@ -28,9 +28,7 @@
             }
             return cookieValue;
         }
-        function converter_result(response) {
-            document.getElementById('click').InnerHTML=response
-        }
+
         function formjson(value) {
 
             var fail = false;
@@ -47,9 +45,9 @@
                 fetch("http://127.0.0.1:8000/conversion/input/", {
                     method: 'POST',
                     headers: { "X-CSRFToken": getCookie("csrftoken"),
-                                    "Accept": "application/json",
+                                    //"Accept": "application/json",
                                     "Content-Type": "application/json"},
-                    body: [JSON.stringify(value)]//.then(data => data.json()).then(res => converter_result = res)
+                    body: [JSON.stringify(value)]//.then(latest_result => latest_result.json()).then(res => result = res)
                 })
             //document.getElementById('click').value = result
             }

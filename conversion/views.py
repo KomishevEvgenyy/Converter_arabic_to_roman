@@ -38,15 +38,12 @@ def input_numbers(request):
                 save = SaveConverter.objects.create(number_converter=number, result_converter=result)
                 #  Сохраняем результат в базу данных
                 latest_result = {'result': result}
-                #ctx = {'latest_result': latest_result}
             else:
                 result = convert(data)
                 # Конвертируем полученные данные и результат записываем в переменную
                 save = SaveConverter.objects.create(number_converter=data, result_converter=result)
                 #  Сохраняем результат в базу данных
                 latest_result = {'result': result}
-                # ctx = {'latest_result': latest_result}
-
             return render(request, template_name, latest_result)
     else:
         return render(request, template_name)
