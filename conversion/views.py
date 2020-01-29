@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 import json
 
 from .models import SaveConverter
@@ -38,15 +38,11 @@ def input_numbers(request):
                 # Конвертируем полученные данные и результат записываем в переменную
                 save = SaveConverter.objects.create(number_converter=number, result_converter=result)
                 #  Сохраняем результат в базу данных
-                latest_result = {"result": result}
-
             else:
                 result = convert(data)
                 # Конвертируем полученные данные и результат записываем в переменную
                 save = SaveConverter.objects.create(number_converter=data, result_converter=result)
                 #  Сохраняем результат в базу данных
-                latest_result = {"result": result}
-            return render(request, template_name, latest_result)
-
+            return JsonResponse(result, safe=False)
     else:
         return render(request, template_name)
