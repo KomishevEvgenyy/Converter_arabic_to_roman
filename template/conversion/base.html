@@ -32,7 +32,7 @@
         function formjson(value) {
 
             var fail = false;
-            let result = null;
+            let result_data = null;
             if (!value.length) {
                 fail = "Число не введено"
             if (fail) {
@@ -42,14 +42,25 @@
                 return false
                 }
             } else {
-                fetch("http://127.0.0.1:8000/conversion/input/", {
-                    method: 'POST',
-                    headers: { "X-CSRFToken": getCookie("csrftoken"),
-                                    //"Accept": "application/json",
-                                    "Content-Type": "application/json"},
-                    body: [JSON.stringify(value)]//.then(latest_result => latest_result.json()).then(res => result = res)
-                })
-            //document.getElementById('click').value = result
+                    fetch("http://127.0.0.1:8000/conversion/input/", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                            "X-CSRFToken": getCookie("csrftoken"),
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(value)
+                    }).then(function(latest_result) {
+                        return latest_result.json();
+                    }).then(latest_result => document.getElementById('result').value=latest_result.result
+                    ).then(function(latest_result) {
+                        return latest_result.json();
+                    }).then(function(data) {
+                        console.log("Data is ok", data);
+                    }).catch(function(ex) {
+                        console.log("parsing failed", ex);
+                    });
             }
         }
     </script>
@@ -68,7 +79,7 @@
                         <input type="button" onclick="formjson(document.getElementById('incoming').value)" name="button" value="Конвертировать"/>
                     </td>
                     <td>
-                        <textarea name="click" placeholder="Результат" cols="30" rows="7" readonly="readonly" id="click" value="">{{latest_result}}</textarea>
+                        <textarea name="result" placeholder="Результат" cols="30" rows="7" readonly="readonly" id="result"></textarea>
                     </td>
                 </th>
             </table>
