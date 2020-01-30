@@ -9,7 +9,7 @@ from .forms import ConverterForm
 
 
 def convert(number):
-    #  Принимает POST запрос и в зависимости от типа данных проводит конвертацию
+    #  Принимает запрос и в зависимости от типа данных проводит конвертацию
     if isinstance(number, int):
         #  Проводит конвертацию если получен тип данных int
         num = ConverterToRoman(number)

@@ -20,7 +20,9 @@ class ConverterToArabic(str):
     def check_valid(self, roman):
         #  метод проверки ввода данных на их валидность
         roman = roman.upper()
-        invalid = ['IIII', 'VV', 'XXXX', 'LL', 'CCCC', 'DD', 'MMMM']
+        invalid = ['IIII', 'VV', 'XXXX', 'LL', 'CCCC', 'DD', 'MMMM',
+                   'A', 'B', 'E', 'F', 'G', 'H', 'J', 'K', 'N', 'O',
+                   'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'Y', 'Z']
         if any(sub in roman for sub in invalid):
-            raise ValueError('Numerus invalidus est: {}'.format(roman))
+            raise ValueError('Такого числа не существует. Вы ввели {}'.format(roman))
         return roman
