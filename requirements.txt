@@ -1,5 +1,5 @@
 asgiref==3.2.3
-Django==3.0.2
+Django==3.1.13
 django-grappelli==2.13.3
 numeral==0.1.0.11
 pytz==2019.3
